@@ -4,6 +4,7 @@ import { UsePeliculashook } from '../../Hooks/UsePeliculas.hook'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { PosterCarousel } from '../../Componentes/Peliculas/Poster-Carousel'
 import { HorizontalCarousel } from '../../Componentes/Peliculas/Horizontal-Carousel'
+import { CargandoPantallaCompleta } from '../../Componentes/Cargando/Cargando-Pantalla-Completa'
 
 export const InicioPantalla = () => {
   //Para saber Area Segura
@@ -11,7 +12,7 @@ export const InicioPantalla = () => {
   const {cargando,carteleras, Popular,masValorada,Proximamente, SiguientePaginasPeliculasPopulares} = UsePeliculashook()
   if(cargando)
   {
-    return(<Text>Cargando...</Text>)
+    return(<CargandoPantallaCompleta/>)
   }
   return (
     <ScrollView>

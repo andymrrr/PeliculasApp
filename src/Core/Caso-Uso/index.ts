@@ -7,3 +7,4 @@ export  *from './Peliculas/Proximamente.Caso-Uso'
 
 
 export *from './Pelicula/Buscar-Por-Id.Caso-Uso'
+export *from './Pelicula/Buscar-Actores.Caso-Uso'

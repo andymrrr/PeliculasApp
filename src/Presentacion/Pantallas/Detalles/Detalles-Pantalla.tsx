@@ -1,21 +1,22 @@
 import {StackScreenProps} from '@react-navigation/stack';
 import React from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView} from 'react-native';
 import {PeliculaStackParametro} from '../../Navegacion/Stack-Navegacion';
 import {UsePeliculahook} from '../../Hooks/UsePelicula.hook';
 import {PeliculaCabecera} from '../../Componentes/Pelicula/Pelicula-Cabecera';
-import { PeliculaDetalle } from '../../Componentes/Pelicula/Pelicula-Detalle';
+import {PeliculaDetalle} from '../../Componentes/Pelicula/Pelicula-Detalle';
+import {CargandoPantallaCompleta} from '../../Componentes/Cargando/Cargando-Pantalla-Completa';
 interface Propiedad
   extends StackScreenProps<PeliculaStackParametro, 'Detalles'> {}
 export const DetallesPantalla = ({navigation, route}: Propiedad) => {
   const {idPelicula} = route.params;
-  const {cargando, pelicula} = UsePeliculahook(idPelicula);
+  const {cargando, pelicula, actor} = UsePeliculahook(idPelicula);
   if (cargando) {
-    return <Text>Cargando</Text>;
+    return <CargandoPantallaCompleta />;
   }
 
   return (
-    <View>
+    <ScrollView>
       {/*Cabecera */}
       <PeliculaCabecera
         titulo={pelicula!.titulo}
@@ -23,7 +24,7 @@ export const DetallesPantalla = ({navigation, route}: Propiedad) => {
         poster={pelicula!.poster}
       />
       {/*Detalle */}
-      <PeliculaDetalle pelicula={pelicula!} />
-    </View>
+      <PeliculaDetalle pelicula={pelicula!} actores={actor} />
+    </ScrollView>
   );
 };
