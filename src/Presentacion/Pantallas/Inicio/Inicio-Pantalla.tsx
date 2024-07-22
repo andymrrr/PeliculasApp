@@ -1,12 +1,34 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
+import { UsePeliculashook } from '../../Hooks/UsePeliculas.hook'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { PosterCarousel } from '../../Componentes/Peliculas/Poster-Carousel'
+import { HorizontalCarousel } from '../../Componentes/Peliculas/Horizontal-Carousel'
 
 export const InicioPantalla = () => {
+  //Para saber Area Segura
+  const  {top} =useSafeAreaInsets()
+  const {cargando,carteleras, Popular,masValorada,Proximamente, SiguientePaginasPeliculasPopulares} = UsePeliculashook()
+  if(cargando)
+  {
+    return(<Text>Cargando...</Text>)
+  }
   return (
-    <View>
-        <Text>
-            InicioPantalla
-        </Text>
-    </View>
-  )
+    <ScrollView>
+      <View style={{marginTop: top + 20, paddingBottom: 30}}>
+        {/*Principal*/}
+        <PosterCarousel peliculas={carteleras} />
+        {/*Popular*/}
+        <HorizontalCarousel
+          peliculas={Popular}
+          titulo="Popular"
+          CargarSiguientePagina={() => SiguientePaginasPeliculasPopulares()}
+        />
+        {/*Mas Valoradas*/}
+        <HorizontalCarousel peliculas={masValorada} titulo="Mas Valorada" />
+        {/*Proximamente*/}
+        <HorizontalCarousel peliculas={Proximamente} titulo="Proximamente" />
+      </View>
+    </ScrollView>
+  );
 }

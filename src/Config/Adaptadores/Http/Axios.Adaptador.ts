@@ -19,6 +19,7 @@ export class AxiosAdaptador implements HttpAdaptador {
 
             return data;
         } catch (error) {
+            console.log(error)
             throw new Error(`Error al solicitar informacion de ${url}`)
         }
     }
